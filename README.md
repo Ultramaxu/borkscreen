@@ -43,6 +43,12 @@ flag to specify the output file:
 cargo run -- -w "window title" -o "output_file.png"
 ```
 
+If you are unsure of the window title, use can use the following utility to list all the window titles:
+
+```bash
+xwininfo -root -tree
+```
+
 ## Testing
 
 Run the tests with:
@@ -50,6 +56,14 @@ Run the tests with:
 ```bash
 cargo test
 ```
+
+## Roadmap
+
+- Add support to list all the window titles
+- Redo the X11 bindings in TDD
+- Add support for Windows
+- (Maybe add XCB support)
+- (Maybe add support for Wayland)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
