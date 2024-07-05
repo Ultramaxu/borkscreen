@@ -1,11 +1,31 @@
-image: git.lab.me:5050/ultramaxu/docker-images/rust-alpine
-
 stages:
-  - test
+  - core
+  - deploy
 
 core-test:
-  stage: test
+  stage: core
+  image: git.lab.me:5050/ultramaxu/docker-images/rust-alpine
   script:
-    - echo $PATH
-    - which cargo
     - cargo test
+
+core-build:
+  stage: core
+  image: git.lab.me:5050/ultramaxu/docker-images/rust-alpine
+  script:
+    - cargo build --release
+  artifacts:
+    paths:
+      - target/release/banscreen
+
+deploy:
+  stage: deploy
+  needs:
+    - core-test
+    - core-build
+  image:
+    name: minio/mc
+    entrypoint: ['']
+  before_script:
+    - mc alias set minio $MINIO_HOST $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
+  script:
+    - mc cp target/release/banscreen minio/homelab-distribution/banscreen/
