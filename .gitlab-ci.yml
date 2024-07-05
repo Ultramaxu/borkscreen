@@ -70,18 +70,3 @@ core-integration-test:
   cache:
     <<: *global_cache
     policy: pull
-
-deploy:
-  stage: deploy
-  needs:
-    - core-test
-    - core-integration-test
-  image:
-    name: minio/mc
-    entrypoint: ['']
-  only:
-    - tags
-  before_script:
-    - mc alias set minio $MINIO_HOST $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
-  script:
-    - mc cp target/release/borkscreen minio/homelab-distribution/borkscreen/

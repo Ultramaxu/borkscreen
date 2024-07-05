@@ -1,16 +1,16 @@
 [package]
-name = "banscreen"
+name = "borkscreen"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
-name = "banscreen"
+name = "borkscreen"
 path = "src/lib.rs"
 
 [[bin]]
-name = "banscreen"
+name = "borkscreen"
 path = "src/main.rs"
 
 [dependencies]
