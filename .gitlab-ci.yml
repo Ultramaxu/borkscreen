@@ -1,31 +1,85 @@
 stages:
-  - core
+  - build
+  - test
   - deploy
 
-core-test:
-  stage: core
-  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
-  script:
-    - cargo test
+cache: &global_cache          # Default cache configuration with YAML variable
+  # `global_cache` pointing to this block
+
+  key: ${CI_COMMIT_REF_SLUG}  # Share cache between all jobs on one branch/tag
+
+  paths:                      # Paths to cache
+    - .cargo/bin
+    - .cargo/registry/index
+    - .cargo/registry/cache
+    - target/debug/deps
+    - target/debug/build
+  policy: pull-push           # All jobs not setup otherwise pull from
+  # and push to the cache
+
+variables:
+  CARGO_HOME: ${CI_PROJECT_DIR}/.cargo # Move cargo data into the project
+  # directory so it can be cached
 
 core-build:
-  stage: core
+  stage: build
   image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
   script:
     - cargo build --release
   artifacts:
     paths:
-      - target/release/banscreen
+      - target/release/borkscreen
+  cache:
+    <<: *global_cache
+
+core-test:
+  stage: test
+  needs:
+    - core-build
+  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
+  script:
+    - cargo test --lib --bins
+  cache:
+    <<: *global_cache
+    policy: pull
+
+core-integration-test:
+  stage: test
+  needs:
+    - core-build
+  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
+  services:
+    - docker:24.0.5-dind
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  before_script:
+    - |
+      for i in $(seq 1 30)
+      do
+          docker info && break
+          echo "Waiting for docker to start"
+          sleep 1s
+      done
+  script:
+    - cargo test --test "*" -- --test-threads=1
+  cache:
+    <<: *global_cache
+    policy: pull
 
 deploy:
   stage: deploy
   needs:
     - core-test
-    - core-build
+    - core-integration-test
   image:
     name: minio/mc
     entrypoint: ['']
+  only:
+    - tags
   before_script:
     - mc alias set minio $MINIO_HOST $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
   script:
-    - mc cp target/release/banscreen minio/homelab-distribution/banscreen/
+    - mc cp target/release/borkscreen minio/homelab-distribution/borkscreen/
