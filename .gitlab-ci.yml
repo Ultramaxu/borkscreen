@@ -10,7 +10,7 @@ core-test:
 
 core-build:
   stage: core
-  image: git.lab.me:5050/ultramaxu/docker-images/rust-alpine
+  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:latest
   script:
     - cargo build --release
   artifacts:
