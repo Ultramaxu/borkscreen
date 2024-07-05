@@ -1,13 +1,13 @@
-use crate::gateways::{FileSystemGateway, WindowSystemGateway};
+use crate::gateways::{FileSystemGateway, ScreenShotWindowSystemGateway};
 
 pub struct TakeScreenShotUseCase {
-    pub window_system_gateway: Box<dyn WindowSystemGateway>,
+    pub window_system_gateway: Box<dyn ScreenShotWindowSystemGateway>,
     pub fs_gateway: Box<dyn FileSystemGateway>,
 }
 
 impl TakeScreenShotUseCase {
     pub fn new(
-        window_system_gateway: Box<dyn WindowSystemGateway>,
+        window_system_gateway: Box<dyn ScreenShotWindowSystemGateway>,
         fs_gateway: Box<dyn FileSystemGateway>,
     ) -> TakeScreenShotUseCase {
         TakeScreenShotUseCase {

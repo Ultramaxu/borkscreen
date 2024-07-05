@@ -2,6 +2,9 @@ use banscreen::fs::fake_file_system_adapter::FakeFileSystemAdapter;
 use banscreen::take_screen_shot_usecase::TakeScreenShotUseCase;
 use banscreen::window_system::fake_window_system_adapter::FakeWindowSystemAdapter;
 
+#[path = "./test_util.rs"]
+mod test_utils;
+
 #[test]
 fn it_should_report_finding_window_failures() {
     // Given
@@ -16,7 +19,7 @@ fn it_should_report_finding_window_failures() {
     let result = when(&mut usecase);
 
     // Then
-    assert_error(result, "Unable to list windows.");
+    test_utils::assert_error(result, "Unable to list windows.");
 }
 
 #[test]
@@ -34,7 +37,7 @@ fn it_should_yield_an_error_if_the_target_window_cannot_be_found() {
     let result = when(&mut usecase);
     
     // Then
-    assert_error(result, "Unable to find the window with title \"window_name\"");
+    test_utils::assert_error(result, "Unable to find the window with title \"window_name\"");
 }
 
 #[test]
@@ -53,7 +56,7 @@ fn it_should_report_screenshot_taking_failures() {
     let result = when(&mut usecase);
 
     // Then
-    assert_error(result, "Unable to take screenshot.");
+    test_utils::assert_error(result, "Unable to take screenshot.");
 }
 
 #[test]
@@ -73,7 +76,7 @@ fn it_should_report_image_saving_failures() {
     let result = when(&mut usecase);
 
     // Then
-    assert_error(result, "Unable to save file");
+    test_utils::assert_error(result, "Unable to save file");
 }
 
 #[test]
@@ -101,15 +104,4 @@ fn it_should_work() {
 
 fn when(usecase: &mut TakeScreenShotUseCase) -> anyhow::Result<()> {
     usecase.take_screenshot("window_name".to_string(), "output_path".to_string())
-}
-
-fn assert_error(
-    result: anyhow::Result<()>,
-    expected_msg: &str
-) {
-    if let Err(e) = result {
-        assert_eq!(e.to_string(), expected_msg);
-    } else {
-        panic!("Expected an error, but got a success result");
-    }
 }
