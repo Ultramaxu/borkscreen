@@ -1,4 +1,5 @@
 use crate::gateways::ListWindowsWindowSystemGateway;
+use crate::results::ResultType;
 
 pub struct ListWindowsUseCase {
     window_system_gateway: Box<dyn ListWindowsWindowSystemGateway>,
@@ -11,7 +12,8 @@ impl ListWindowsUseCase {
         }
     }
 
-    pub fn execute(&self) -> anyhow::Result<Vec<String>> {
-        self.window_system_gateway.list_windows()
+    pub fn execute(&self) -> anyhow::Result<ResultType> {
+        let windows = self.window_system_gateway.list_windows()?;
+        Ok(ResultType::ListWindowResult(windows))
     }
 }

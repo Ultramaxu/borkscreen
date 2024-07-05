@@ -18,3 +18,5 @@ x11-dl = "2.21.0"
 anyhow = "1.0.82"
 image = "0.25.1"
 clap = { version = "4.5.4", features = ["derive"] }
+serde_json = "1.0"
+serde = { version = "1.0.198", features = ["derive"] }

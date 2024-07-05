@@ -1,4 +1,5 @@
 use banscreen::fs::fake_file_system_adapter::FakeFileSystemAdapter;
+use banscreen::results::ResultType;
 use banscreen::take_screen_shot_usecase::TakeScreenShotUseCase;
 use banscreen::window_system::fake_window_system_adapter::FakeWindowSystemAdapter;
 
@@ -102,6 +103,6 @@ fn it_should_work() {
 
 }
 
-fn when(usecase: &mut TakeScreenShotUseCase) -> anyhow::Result<()> {
+fn when(usecase: &mut TakeScreenShotUseCase) -> anyhow::Result<ResultType> {
     usecase.take_screenshot("window_name".to_string(), "output_path".to_string())
 }

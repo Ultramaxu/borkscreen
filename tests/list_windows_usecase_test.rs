@@ -1,4 +1,5 @@
 use banscreen::list_windows_usecase::ListWindowsUseCase;
+use banscreen::results::ResultType;
 use banscreen::window_system::fake_window_system_adapter::FakeWindowSystemAdapter;
 
 #[path = "./test_util.rs"]
@@ -34,9 +35,14 @@ fn it_should_work() {
     let result = when(&mut usecase);
 
     // Then
-    assert_eq!(result.unwrap(), vec!["window1".to_string(), "window2".to_string()]);
+    match result.unwrap() {
+        ResultType::ListWindowResult(windows) => {
+            assert_eq!(windows, vec!["window1".to_string(), "window2".to_string()]);
+        }
+        _ => panic!("Expected ListWindowResult"),
+    }
 }
 
-fn when(usecase: &mut ListWindowsUseCase) -> anyhow::Result<Vec<String>> {
+fn when(usecase: &mut ListWindowsUseCase) -> anyhow::Result<ResultType> {
     usecase.execute()
 }
