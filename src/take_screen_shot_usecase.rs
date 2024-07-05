@@ -130,7 +130,6 @@ mod tests {
 
         // Then
         assert!(result.is_ok());
-
     }
 
     fn when(usecase: &mut TakeScreenShotUseCase) -> anyhow::Result<ResultType> {

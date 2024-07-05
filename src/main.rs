@@ -1,12 +1,12 @@
-use banscreen::fs::image_module_file_system_adapter::ImageModuleFileSystemAdapter;
-use banscreen::take_screen_shot_usecase::TakeScreenShotUseCase;
-use banscreen::window_system::x11_dl_window_system_adapter::X11DLWindowSystemAdapter;
+use borkscreen::fs::image_module_file_system_adapter::ImageModuleFileSystemAdapter;
+use borkscreen::take_screen_shot_usecase::TakeScreenShotUseCase;
+use borkscreen::window_system::x11_dl_window_system_adapter::X11DLWindowSystemAdapter;
 use clap::{Parser, Subcommand, ValueEnum};
-use banscreen::gateways::PresenterGateway;
-use banscreen::list_windows_usecase::ListWindowsUseCase;
-use banscreen::presenter::Presenter;
-use banscreen::presenter_adapter::plain_text_presenter_adapter::PlainTextPresenterAdapter;
-use banscreen::presenter_adapter::serde_presenter_adapter::SerdePresenterAdapter;
+use borkscreen::gateways::PresenterGateway;
+use borkscreen::list_windows_usecase::ListWindowsUseCase;
+use borkscreen::presenter::Presenter;
+use borkscreen::presenter_adapter::plain_text_presenter_adapter::PlainTextPresenterAdapter;
+use borkscreen::presenter_adapter::serde_presenter_adapter::SerdePresenterAdapter;
 
 #[derive(ValueEnum, Copy, Clone, Debug, PartialEq, Eq)]
 enum OutputFormat {
@@ -15,7 +15,7 @@ enum OutputFormat {
 }
 
 #[derive(Parser)]
-#[command(name = "banscreen")]
+#[command(name = "borkscreen")]
 #[command(version = "0.0.0")]
 #[command(about = "Screenshots a window given its title")]
 #[command(long_about = "Does a screenshot of the given window (finds it by the given title) and saves it to the given file.")]

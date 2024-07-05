@@ -63,23 +63,10 @@ core-integration-test:
           echo "Waiting for docker to start"
           sleep 1s
       done
+    - mkdir -p /tmp/.X11-unix
+    - touch /tmp/.X11-unix/X0
   script:
     - cargo test --test "*" -- --test-threads=1
   cache:
     <<: *global_cache
     policy: pull
-
-deploy:
-  stage: deploy
-  needs:
-    - core-test
-    - core-integration-test
-  image:
-    name: minio/mc
-    entrypoint: ['']
-  only:
-    - tags
-  before_script:
-    - mc alias set minio $MINIO_HOST $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
-  script:
-    - mc cp target/release/borkscreen minio/homelab-distribution/borkscreen/

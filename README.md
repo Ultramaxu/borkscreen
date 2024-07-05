@@ -1,11 +1,7 @@
-# Banscreen
+# Borkscreen
 
-[![pipeline status](https://git.lab.me/banshee/banscreen/badges/main/pipeline.svg)](https://git.lab.me/banshee/banscreen/-/commits/main)
-[![coverage report](https://git.lab.me/banshee/banscreen/badges/main/coverage.svg)](https://git.lab.me/banshee/banscreen/-/commits/main)
-[![Latest Release](https://git.lab.me/banshee/banscreen/-/badges/release.svg)](https://git.lab.me/banshee/banscreen/-/releases)
-
-Banscreen is a Rust application that allows you to take screenshots of a window given its title and save it to a
-specified file.
+Borkscreen is a Rust application that allows you to take screenshots of a window given its title and save it to a
+specified file on an X server environment.
 
 ## Features
 
@@ -14,21 +10,21 @@ specified file.
 
 ## Requirements
 
-- Rust 1.76.0+
-- Cargo 1.76.0+
+- Rust 1.79.0+
+- Cargo 1.79.0+
 
 ## Installation
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/ioannisNoukakis/banscreen.git
+git clone https://github.com/ioannisNoukakis/borkscreen.git
 ```
 
 Navigate to the project directory:
 
 ```bash
-cd banscreen
+cd borkscreen
 ```
 
 Build the project:
@@ -64,7 +60,7 @@ cargo test
 ## Roadmap
 
 - [x] Add support to list all the window titles
-- [ ] Redo the X11 bindings in TDD
+- [x] Redo the X11 bindings in TDD
 - [ ] Add support for Windows
 - [ ] (Maybe add XCB support)
 - [ ] (Maybe add support for Wayland)

@@ -4,8 +4,8 @@ use std::time::Duration;
 use testcontainers::{Container, core::WaitFor, GenericImage, ImageExt, runners::SyncRunner};
 use testcontainers::core::{ExecCommand, Mount};
 
-use banscreen::gateways::{ListWindowsWindowSystemGateway, ScreenShotWindowSystemGateway};
-use banscreen::window_system::x11_dl_window_system_adapter::X11DLWindowSystemAdapter;
+use borkscreen::gateways::{ListWindowsWindowSystemGateway, ScreenShotWindowSystemGateway};
+use borkscreen::window_system::x11_dl_window_system_adapter::X11DLWindowSystemAdapter;
 
 #[test]
 fn test_should_list_multiple_windows() {
