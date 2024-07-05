@@ -4,13 +4,13 @@ stages:
 
 core-test:
   stage: core
-  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:latest
+  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
   script:
     - cargo test
 
 core-build:
   stage: core
-  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:latest
+  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
   script:
     - cargo build --release
   artifacts:
