@@ -2,7 +2,7 @@ use std::{env, thread};
 use std::io::BufRead;
 use std::time::Duration;
 use testcontainers::{Container, core::WaitFor, GenericImage, ImageExt, runners::SyncRunner};
-use testcontainers::core::{ExecCommand, Mount};
+use testcontainers::core::{ExecCommand, IntoContainerPort, Mount};
 
 use borkscreen::gateways::{ListWindowsWindowSystemGateway, ScreenShotWindowSystemGateway};
 use borkscreen::window_system::x11_dl_window_system_adapter::X11DLWindowSystemAdapter;
@@ -60,11 +60,11 @@ fn test_should_return_none_if_window_cannot_be_found() {
 }
 
 fn run_xvfb_container() -> Container<GenericImage> {
-    env::set_var("DISPLAY", ":99");
+    env::set_var("DISPLAY", "127.0.0.1:99.0");
     let image_mount_dir = format!("{}/tests/test_images", env::current_dir().unwrap().display());
-    let container = GenericImage::new("git.noukakis.ch:5050/operations/docker-images/xvfb-alpine", "latest")
+    let container = GenericImage::new("ultramaxu/ultramaxu-homelab-xvfb-alpine", "0.0.0")
         .with_wait_for(WaitFor::message_on_stdout("Openbox-Debug: Moving to desktop 1"))
-        .with_mount(Mount::bind_mount("/tmp/.X11-unix", "/tmp/.X11-unix"))
+        .with_mapped_port(6099, 6099.tcp())
         .with_mount(Mount::bind_mount(image_mount_dir, "/images"))
         .start()
         .expect("Unable to start xvfb container");

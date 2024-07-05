@@ -23,7 +23,7 @@ variables:
 
 core-build:
   stage: build
-  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
+  image: ultramaxu/ultramaxu-homelab-rust-alpine:1.79.0
   script:
     - cargo build --release
   artifacts:
@@ -36,7 +36,7 @@ core-test:
   stage: test
   needs:
     - core-build
-  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
+  image: ultramaxu/ultramaxu-homelab-rust-alpine:1.79.0
   script:
     - cargo test --lib --bins
   cache:
@@ -47,7 +47,7 @@ core-integration-test:
   stage: test
   needs:
     - core-build
-  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
+  image: ultramaxu/ultramaxu-homelab-rust-alpine:1.79.0
   services:
     - docker:24.0.5-dind
   variables:
@@ -63,8 +63,6 @@ core-integration-test:
           echo "Waiting for docker to start"
           sleep 1s
       done
-    - mkdir -p /tmp/.X11-unix
-    - touch /tmp/.X11-unix/X0
   script:
     - cargo test --test "*" -- --test-threads=1
   cache:

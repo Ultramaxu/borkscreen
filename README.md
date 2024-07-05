@@ -18,7 +18,7 @@ specified file on an X server environment.
 Clone the repository:
 
 ```bash
-git clone https://github.com/ioannisNoukakis/borkscreen.git
+git clone https://github.com/Ultramaxu/borkscreen.git
 ```
 
 Navigate to the project directory:
