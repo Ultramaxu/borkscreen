@@ -95,13 +95,12 @@ impl X11DLWindowSystemAdapter {
         &self,
         window: x11_dl::xlib::Window,
     ) -> anyhow::Result<Option<String>> {
-        let mut wm_name: Option<String> = None;
-        wm_name = self.try_x_get_wm_name(window);
+        let wm_name = self.try_x_get_wm_name(window);
         // For older versions
-        if wm_name.is_none() {
-            wm_name = self.try_x_fetch_name(window);
+        if wm_name.is_some() {
+            return Ok(wm_name)
         }
-        Ok(wm_name)
+        Ok(self.try_x_fetch_name(window))
     }
 
     // https://www.x.org/releases/current/doc/libX11/libX11/libX11.html#XGetWMName
