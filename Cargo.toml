@@ -5,6 +5,14 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+name = "banscreen"
+path = "src/lib.rs"
+
+[[bin]]
+name = "banscreen-executable"
+path = "src/main.rs"
+
 [dependencies]
 x11-dl = "2.21.0"
 anyhow = "1.0.82"

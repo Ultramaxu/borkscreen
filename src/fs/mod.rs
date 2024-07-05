@@ -1,0 +1,2 @@
+pub mod fake_file_system_adapter;
+pub mod image_module_file_system_adapter;
