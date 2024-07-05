@@ -63,6 +63,8 @@ core-integration-test:
           echo "Waiting for docker to start"
           sleep 1s
       done
+    - mkdir -p /tmp/.X11-unix
+    - touch /tmp/.X11-unix/X0
   script:
     - cargo test --test "*" -- --test-threads=1
   cache:
