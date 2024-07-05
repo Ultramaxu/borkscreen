@@ -96,16 +96,16 @@ impl X11DLWindowSystemAdapter {
         window: x11_dl::xlib::Window,
     ) -> anyhow::Result<Option<String>> {
         let mut wm_name: Option<String> = None;
-        wm_name = self.try_XGetWMName(window);
+        wm_name = self.try_x_get_wm_name(window);
         // For older versions
         if wm_name.is_none() {
-            wm_name = self.try_XFetchName(window);
+            wm_name = self.try_x_fetch_name(window);
         }
         Ok(wm_name)
     }
 
     // https://www.x.org/releases/current/doc/libX11/libX11/libX11.html#XGetWMName
-    fn try_XGetWMName(&self, window: x11_dl::xlib::Window) -> Option<String> {
+    fn try_x_get_wm_name(&self, window: x11_dl::xlib::Window) -> Option<String> {
         unsafe {
             let mut prop: x11_dl::xlib::XTextProperty = std::mem::zeroed();
 
@@ -126,7 +126,7 @@ impl X11DLWindowSystemAdapter {
     }
 
     // According to https://github.com/idunham/xutils/blob/master/xwininfo.c#L487
-    fn try_XFetchName(&self, window: x11_dl::xlib::Window) -> Option<String> {
+    fn try_x_fetch_name(&self, window: x11_dl::xlib::Window) -> Option<String> {
         unsafe {
             let mut data: *mut i8 = std::ptr::null_mut();
             

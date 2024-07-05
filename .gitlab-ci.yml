@@ -6,7 +6,13 @@ core-test:
   stage: core
   image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
   script:
-    - cargo test
+    - cargo test --lib --bins
+
+core-integration-test:
+  stage: core
+  image: git.noukakis.ch:5050/operations/docker-images/rust-alpine:1.79.0
+  script:
+    - cargo test --test "*" -- --test-threads=1
 
 core-build:
   stage: core
