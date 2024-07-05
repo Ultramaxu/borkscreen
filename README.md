@@ -48,7 +48,7 @@ cargo run -- capture -w "window title" -o "output_file.png"
 If you are unsure of the window title, use can use the `list` subcommand to list all the window titles:
 
 ```bash
-cargo run -- -l
+cargo run -- list
 ```
 
 ## Testing
