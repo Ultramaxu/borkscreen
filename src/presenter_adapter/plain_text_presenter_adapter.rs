@@ -15,7 +15,7 @@ impl PresenterGateway for PlainTextPresenterAdapter {
         Ok(())
     }
 
-    fn present_result(&self, result: ResultType) -> anyhow::Result<()> {
+    fn present_result(&self, result: &ResultType) -> anyhow::Result<()> {
         match result {
             ResultType::ListWindowResult(windows) => {
                 println!("Windows:");

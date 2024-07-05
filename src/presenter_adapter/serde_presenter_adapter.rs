@@ -17,10 +17,10 @@ impl PresenterGateway for SerdePresenterAdapter {
         Ok(())
     }
 
-    fn present_result(&self, result: ResultType) -> anyhow::Result<()> {
+    fn present_result(&self, result: &ResultType) -> anyhow::Result<()> {
         match result {
             ResultType::ListWindowResult(windows) => {
-                let res = ListWindowsResult { _type: "ListWindowsResult".to_string(), windows };
+                let res = ListWindowsResult { _type: "ListWindowsResult".to_string(), windows: windows.to_vec() };
                 println!("{}", serde_json::to_string_pretty(&res)?);
             }
             ResultType::TakeScreenShotResult(()) => {

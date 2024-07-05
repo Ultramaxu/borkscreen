@@ -49,7 +49,7 @@ fn main() {
     };
     let presenter = Presenter::new(presenter_adapter);
 
-    presenter.present(match &cli.command {
+    let command_result = match &cli.command {
         Commands::Capture { window_title, output_file } => {
             let mut usecase = TakeScreenShotUseCase::new(
                 Box::new(X11DLWindowSystemAdapter::new().expect("Unable to create X11DLWindowSystemAdapter.")),
@@ -66,5 +66,11 @@ fn main() {
             );
             usecase.execute()
         }
-    }).expect("Unable to present result.");
+    };
+    presenter.present(&command_result).expect("Unable to present command result.");
+    
+    match command_result { 
+        Ok(_) => std::process::exit(0),
+        Err(_) => std::process::exit(1),
+    }
 }

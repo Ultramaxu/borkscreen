@@ -15,5 +15,5 @@ pub trait FileSystemGateway {
 
 pub trait PresenterGateway {
     fn present_error(&self, cause: String) -> anyhow::Result<()>;
-    fn present_result(&self, result: ResultType) -> anyhow::Result<()>;
+    fn present_result(&self, result: &ResultType) -> anyhow::Result<()>;
 }
