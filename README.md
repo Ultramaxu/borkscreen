@@ -1,6 +1,8 @@
 # Banscreen
 
 [![pipeline status](https://git.lab.me/banshee/banscreen/badges/main/pipeline.svg)](https://git.lab.me/banshee/banscreen/-/commits/main)
+[![coverage report](https://git.lab.me/banshee/banscreen/badges/main/coverage.svg)](https://git.lab.me/banshee/banscreen/-/commits/main)
+[![Latest Release](https://git.lab.me/banshee/banscreen/-/badges/release.svg)](https://git.lab.me/banshee/banscreen/-/releases)
 
 Banscreen is a Rust application that allows you to take screenshots of a window given its title and save it to a
 specified file.
@@ -8,7 +10,7 @@ specified file.
 ## Features
 
 - Screenshots a window given its title
-- Saves the screenshot to a specified file
+- Lists all windows
 
 ## Requirements
 
@@ -61,11 +63,11 @@ cargo test
 
 ## Roadmap
 
-- Add support to list all the window titles
-- Redo the X11 bindings in TDD
-- Add support for Windows
-- (Maybe add XCB support)
-- (Maybe add support for Wayland)
+- [x] Add support to list all the window titles
+- [ ] Redo the X11 bindings in TDD
+- [ ] Add support for Windows
+- [ ] (Maybe add XCB support)
+- [ ] (Maybe add support for Wayland)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
