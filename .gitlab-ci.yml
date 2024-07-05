@@ -1,0 +1,11 @@
+image: git.lab.me:5050/ultramaxu/docker-images/rust-alpine
+
+stages:
+  - test
+
+core-test:
+  stage: test
+  script:
+    - echo $PATH
+    - which cargo
+    - cargo test

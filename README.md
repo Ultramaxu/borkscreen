@@ -1,5 +1,7 @@
 # Banscreen
 
+[![pipeline status](https://git.lab.me/banshee/banscreen/badges/main/pipeline.svg)](https://git.lab.me/banshee/banscreen/-/commits/main)
+
 Banscreen is a Rust application that allows you to take screenshots of a window given its title and save it to a
 specified file.
 
@@ -36,17 +38,17 @@ cargo build --release
 ## Usage
 
 Usage
-Run the application with the `-w` or `--window_title` flag to specify the window title and the `-o` or `--output_file`
+Run the application with the `capture` subcommand and the `-w` or `--window_title` flag to specify the window title and the `-o` or `--output_file`
 flag to specify the output file:
 
 ```bash
-cargo run -- -w "window title" -o "output_file.png"
+cargo run -- capture -w "window title" -o "output_file.png"
 ```
 
-If you are unsure of the window title, use can use the following utility to list all the window titles:
+If you are unsure of the window title, use can use the `list` subcommand to list all the window titles:
 
 ```bash
-xwininfo -root -tree
+cargo run -- -l
 ```
 
 ## Testing
