@@ -14,7 +14,7 @@ name = "borkscreen"
 path = "src/main.rs"
 
 [dependencies]
-x11-dl = "2.21.0"
+x11 = { version = "2.21.0", features = ["xlib"] }
 anyhow = "1.0.82"
 image = "0.25.1"
 clap = { version = "4.5.4", features = ["derive"] }
