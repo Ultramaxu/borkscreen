@@ -1,5 +1,7 @@
 # Borkscreen
 
+![logo of project](docs/borkscreen.jpeg)
+
 Borkscreen is a Rust application that allows you to take screenshots of a window given its title and save it to a
 specified file on an X server environment.
 
