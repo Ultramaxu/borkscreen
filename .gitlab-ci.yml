@@ -23,7 +23,7 @@ variables:
 
 core-build:
   stage: build
-  image: ultramaxu/ultramaxu-homelab-rust-alpine:1.79.0
+  image: ultramaxu/ultramaxu-homelab-rust-debian-x11:1.79.0-bookworm
   script:
     - cargo build --release
   artifacts:
@@ -36,7 +36,7 @@ core-test:
   stage: test
   needs:
     - core-build
-  image: ultramaxu/ultramaxu-homelab-rust-alpine:1.79.0
+  image: ultramaxu/ultramaxu-homelab-rust-debian-x11:1.79.0-bookworm
   script:
     - cargo test --lib --bins
   cache:
@@ -47,7 +47,7 @@ core-integration-test:
   stage: test
   needs:
     - core-build
-  image: ultramaxu/ultramaxu-homelab-rust-alpine:1.79.0
+  image: ultramaxu/ultramaxu-homelab-rust-debian-x11:1.79.0-bookworm
   services:
     - docker:24.0.5-dind
   variables:
